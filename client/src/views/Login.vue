@@ -1,27 +1,26 @@
 <template>
-  <section class="hero is-primary is-fullheight">
+  <section class="hero is-success is-fullheight">
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
-          This is our plants!
+          - Sign In -
         </h1>
         <h2 class="subtitle">
-          List full of leafy-ish stuffs!
+          To access endless plants!
         </h2>
-        <ProductList />
-        <ProductList />
+        <LoginForm />
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import ProductList from '@/components/ProductList.vue';
+import LoginForm from '@/components/LoginForm.vue';
 
 export default {
-  name: 'Home',
+  name: 'Login',
   components: {
-    ProductList,
+    LoginForm,
   },
 };
 </script>
