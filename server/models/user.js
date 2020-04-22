@@ -1,4 +1,3 @@
-'use strict';
 const { hashPassword } = require('../helpers/bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
@@ -57,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
     { sequelize }
   );
 
-  User.addHook('afterValidate', async function (user, options) {
+  User.addHook('afterValidate', async function (user, _) {
     const newPassword = await hashPassword(user.password);
     user.password = newPassword;
   });
@@ -67,4 +66,3 @@ module.exports = (sequelize, DataTypes) => {
   };
   return User;
 };
-

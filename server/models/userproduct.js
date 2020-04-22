@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const UserProduct = sequelize.define(
     'UserProduct',
@@ -28,4 +27,3 @@ module.exports = (sequelize, DataTypes) => {
   };
   return UserProduct;
 };
-
