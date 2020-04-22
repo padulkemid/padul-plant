@@ -2,6 +2,8 @@ const route = require('express').Router();
 const ProductController = require('../controllers/product');
 const Auth = require('../middlewares/auths');
 
+// BASE URL : /items
+
 // get products
 route.get('/', Auth.authentication, ProductController.getItems);
 

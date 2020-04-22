@@ -22,8 +22,8 @@ class Auth {
 
     User.findOne({
       where: {
-        UserId,
-        Role,
+        id: UserId,
+        role: Role,
       },
     })
       .then((user) => {

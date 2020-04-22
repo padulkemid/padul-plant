@@ -36,6 +36,10 @@ class UserController {
       .then((user) => {
         if (!user) {
           throw new Error('User not found!');
+        } else if (user.email === 'admin@admin.id' || user.password === 'admin') {
+          throw new Error('Admin cannot login here!');
+        } else if (user.role === 'admin') {
+          throw new Error('Admin cannot login here!');
         } else {
           userData = user;
           const decrypt = decryptPassword(password, user.password);

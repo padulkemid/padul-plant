@@ -1,0 +1,66 @@
+#!/bin/sh
+
+# CUPANG : CUrl dibikin gamPANG
+# ====================
+# uses jq ( for json highlighting )
+# thanks to beadlist for the guide!
+# by padulkemid
+# ====================
+# HOW TO USE
+# ====================
+# 1. comment/un-comment functions on the 'script' tag below ( end of file )
+# 2. execute this script by running : 
+#      chmod +x (name_of_this_script, default is pcl)
+#      ./pcl
+# ====================
+
+# functions
+create_user() {
+  curl -X POST \
+    -H 'Content-Type: application/json' \
+    -d @$1 \
+    -v "$URL/register"
+}
+
+login_user() {
+  curl -X POST \
+    -H 'Content-Type: application/json' \
+    -d @$1 \
+    -v "$URL/login"
+}
+
+list(){
+  curl -X GET \
+    -H 'Content-Type: application/json' \
+    -H "token: $TOKEN" \
+    -v "$URL/items"
+}
+
+carts(){
+  curl -X GET \
+    -H 'Content-Type: application/json' \
+    -H "token: $TOKEN" \
+    -v "$URL/items/cart"
+}
+
+buy() {
+  curl -X POST \
+    -H 'Content-Type: application/json' \
+    -H "token: $TOKEN" \
+    -d @$1 \
+    -v "$URL/items/1"
+}
+
+# address
+URL="http://localhost:3000"
+TOKEN=$(login_user user_login_test.json | jq -r .token)
+
+# script
+# I used a file called test.json to send the request
+# by default, it searches for this
+# ====================================================
+# create_user data_test.json | jq '.'
+# login_user user_login_test.json | jq '.'
+list | jq '.'
+# carts | jq '.'
+# buy | jq '.'
