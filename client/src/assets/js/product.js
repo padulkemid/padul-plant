@@ -10,10 +10,11 @@ const list = () => {
   }).then((res) => res.json());
 };
 
-const buy = (id) => {
+const buy = (data, id) => {
   const buyUrl = `${url}/${id}`;
   return fetch(buyUrl, {
     method: 'post',
+    body: JSON.stringify(data),
     headers: {
       token,
       'Content-Type': 'application/json',

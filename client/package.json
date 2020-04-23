@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "npm run lint && firebase deploy"
+    "deploy": "npm run build && firebase deploy"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
