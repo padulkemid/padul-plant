@@ -24,8 +24,10 @@ import ProductList from '@/components/ProductList.vue';
 
 export default {
   name: 'Home',
-  created() {
+  beforeCreate() {
     this.$store.dispatch('productList');
+  },
+  created() {
     this.$store.dispatch('userCart');
   },
   computed: {
