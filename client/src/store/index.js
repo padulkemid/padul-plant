@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import { login, register } from '@/assets/js/user.js';
-import { list, buy, cartList, cleanCart } from '@/assets/js/product.js';
+import { list, cleanCart } from '@/assets/js/product.js';
 
 Vue.use(Vuex);
 
@@ -31,10 +31,13 @@ const store = new Vuex.Store({
         return res;
       });
     },
-    userCart() {
-      cartList().then((res) => {
-        console.log(res);
-      });
+    userCart({ commit }) {
+      let cart = JSON.parse(localStorage.getItem('cartList'));
+      if (!cart) {
+        commit('SET_CART', []);
+      } else {
+        commit('SET_CART', cart);
+      }
     },
     userCleanCart() {
       cleanCart().then((res) => {
@@ -47,10 +50,11 @@ const store = new Vuex.Store({
         commit('SET_PRODUCT', res.items);
       });
     },
-    productBought(_, id) {
-      buy(id).then((res) => {
-        console.log(res);
-      });
+    productBought({ state, commit }, payload) {
+      let tempCart = state.cart;
+      tempCart.push(payload);
+      localStorage.setItem('cartList', JSON.stringify(tempCart));
+      commit('SET_CART', tempCart);
     },
   },
 });

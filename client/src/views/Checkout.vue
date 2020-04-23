@@ -19,6 +19,9 @@ import CartTable from '@/components/CartTable.vue';
 
 export default {
   name: 'Checkout',
+  created() {
+    this.$store.dispatch('userCart');
+  },
   components: {
     CartTable,
   },

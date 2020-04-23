@@ -26,6 +26,7 @@ export default {
   name: 'Home',
   created() {
     this.$store.dispatch('productList');
+    this.$store.dispatch('userCart');
   },
   computed: {
     getProducts() {

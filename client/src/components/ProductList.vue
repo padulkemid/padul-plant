@@ -26,14 +26,21 @@
       <div class="buttons">
         <button class="button is-static is-fullwidth">Rp. {{ product.price }}</button>
       </div>
-      <div class="buttons">
-        <button class="button is-success is-fullwidth">
-          <span>Add</span>
-          <span class="icon is-small">
-            <i class="fas fa-shopping-cart"></i>
-          </span>
-        </button>
-      </div>
+      <form @submit.prevent="buy">
+        <div class="field">
+          <div class="control">
+            <input v-model="qty" class="input" type="number" placeholder="Quantity" required />
+          </div>
+        </div>
+        <div class="buttons">
+          <button type="submit" class="button is-success is-fullwidth">
+            <span>Add</span>
+            <span class="icon is-small">
+              <i class="fas fa-shopping-cart"></i>
+            </span>
+          </button>
+        </div>
+      </form>
     </div>
   </article>
 </template>
@@ -42,6 +49,36 @@
 export default {
   name: 'ProductList',
   props: ['product'],
+  data() {
+    return {
+      qty: '',
+    };
+  },
+  methods: {
+    buy() {
+      const { id, name, image_url, price, stock } = this.product;
+      const qty = Number(this.qty);
+      const struct = {
+        id,
+        name,
+        image_url,
+        price,
+        stock,
+        qty,
+      };
+
+      if (qty == 0) {
+        this.$noty.error('How much did you want to buy?');
+      } else if (qty > stock) {
+        this.$noty.error(`Item is only available for ${stock} bundle`);
+      } else {
+        this.$store.dispatch('productBought', struct);
+        this.$noty.success(`${name} added to cart!`);
+      }
+
+      this.qty = '';
+    },
+  },
 };
 </script>
 

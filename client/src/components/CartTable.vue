@@ -9,21 +9,11 @@
             <th>Price</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-for="item in getCart" :key="item.id">
           <tr>
-            <td>Anggrek</td>
-            <td>5 pot</td>
-            <td>Rp 250.000</td>
-          </tr>
-          <tr>
-            <td>Lidah Buaya</td>
-            <td>2 pot</td>
-            <td>Rp 100.000</td>
-          </tr>
-          <tr>
-            <td>Jeruk</td>
-            <td>1 pot</td>
-            <td>Rp 50.000</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.qty }} bundle</td>
+            <td>Rp. {{ item.price * item.qty }}</td>
           </tr>
         </tbody>
       </table>
@@ -42,6 +32,11 @@
 <script>
 export default {
   name: 'CartTable',
+  computed: {
+    getCart() {
+      return this.$store.state.cart;
+    },
+  },
 };
 </script>
 
