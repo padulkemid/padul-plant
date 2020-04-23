@@ -1,13 +1,49 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/register">Register</router-link> | <router-link to="/">Home</router-link> |
-      <router-link to="/checkout">Cart : 0</router-link>
+      <div v-if="!showNav">
+        <router-link to="/login">Login</router-link> |
+        <router-link to="/register">Register</router-link>
+      </div>
+      <div v-else>
+        <router-link to="/">Home</router-link> |
+        <router-link to="/checkout">Cart : 0</router-link> |||
+        <a @click="logout">Logout</a>
+      </div>
     </div>
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      showNav: false,
+    };
+  },
+  created() {
+    this.loginCheck();
+  },
+  beforeUpdate() {
+    this.loginCheck();
+  },
+  methods: {
+    loginCheck() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        this.showNav = false;
+      } else {
+        this.showNav = true;
+      }
+    },
+    logout() {
+      localStorage.clear();
+      this.$router.push('/login');
+    },
+  },
+};
+</script>
 
 <style>
 #app {

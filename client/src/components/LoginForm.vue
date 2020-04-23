@@ -36,8 +36,27 @@ export default {
     };
   },
   methods: {
+    formPristine() {
+      this.form.email = '';
+      this.form.password = '';
+    },
     submitLogin() {
-      console.log(this.form);
+      const { email, password } = this.form;
+      const struct = {
+        email,
+        password,
+      };
+
+      this.$store.dispatch('userLogin', struct).then((res) => {
+        this.formPristine();
+
+        if (!res.token) {
+          this.$noty.error(res.message);
+        } else {
+          this.$noty.info(res.message);
+          this.$router.push('/');
+        }
+      });
     },
   },
 };

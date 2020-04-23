@@ -45,8 +45,29 @@ export default {
     };
   },
   methods: {
+    formPristine() {
+      this.form.email = '';
+      this.form.username = '';
+      this.form.password = '';
+    },
     submitRegister() {
-      console.log(this.form);
+      const { email, username, password } = this.form;
+      const struct = {
+        email,
+        username,
+        password,
+      };
+
+      this.$store.dispatch('userRegister', struct).then((res) => {
+        this.formPristine();
+
+        if (!res.success) {
+          this.$noty.error(res.message);
+        } else {
+          this.$noty.info(res.message);
+          this.$router.push('/login');
+        }
+      });
     },
   },
 };

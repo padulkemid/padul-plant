@@ -8,8 +8,12 @@
         <h2 class="subtitle">
           List full of leafy-ish stuffs!
         </h2>
-        <ProductList />
-        <ProductList />
+        <div v-if="getProducts.length">
+          <ProductList v-for="item in getProducts" :key="item.id" :product="item" />
+        </div>
+        <div v-else>
+          <button class="button is-loading is-info is-large">Loading</button>
+        </div>
       </div>
     </div>
   </section>
@@ -20,6 +24,14 @@ import ProductList from '@/components/ProductList.vue';
 
 export default {
   name: 'Home',
+  created() {
+    this.$store.dispatch('productList');
+  },
+  computed: {
+    getProducts() {
+      return this.$store.state.items;
+    },
+  },
   components: {
     ProductList,
   },
