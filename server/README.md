@@ -7,7 +7,7 @@
 - First run `npm install` to get all packages.
 - Then run `npm run gen:dev` to generate database for development.
 - Add / Edit / Remove stuffs.
-- To lint ( using [Eslint! 🧾](https://github.com/eslint/eslint) ) run `npm run lint` or `npm run lint:fix`.
+- To lint ( using [Eslint! 🧾](https://github.com/eslint/eslint) ) run `npm run lint`.
 - Auto hooks is installed ( using [Husky! 🐶](https://github.com/typicode/husky) ), before commiting and push  
   `npm` will lint and fix your code.
 
@@ -25,9 +25,7 @@
 
 ## RESTful API 🤩
 
----
-
-#### GET 💵
+### GET 💵
 
 - **BASE**/_items_
 
@@ -71,7 +69,7 @@
     }
     ```
 
-#### POST 📝
+### POST 📝
 
 - **BASE**/_register_
 
